@@ -14,9 +14,9 @@ st.sidebar.header("Filtri")
 species = st.sidebar.radio("Seleziona la specie:", ["Raspberry", "Blackberry"])
 
 if species == "Raspberry":
-    df = load_data("/Users/admin/Desktop/analisi_lampone_rifiorente.xlsx")
+    df = load_data("analisi_lampone_rifiorente.xlsx")
 else:
-    df = load_data("/Users/admin/Desktop/analisi_mora_unifera.xlsx")
+    df = load_data("analisi_mora_unifera.xlsx")
 
 varieta_list = df["Varietà"].unique()
 varieta_sel = st.sidebar.multiselect("Seleziona le varietà", varieta_list)
