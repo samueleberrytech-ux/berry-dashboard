@@ -1,22 +1,27 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import gdown
+
+DATA_URLS = {
+    "Raspberry": "https://drive.google.com/uc?id=1Wmzya0x9D45bUpDU9KjA8sUL1zDJM5d9",
+    "Blackberry": "https://drive.google.com/uc?id=1bv1Dca6kXH28-klpqPvLshBs32efQlBw"
+}
 
 @st.cache_data
-def load_data(path):
-    df = pd.read_excel(path)
+def load_data(species):
+    url = DATA_URLS[species]
+    output = f"{species}.xlsx"
+    gdown.download(url, output, quiet=True)
+    df = pd.read_excel(output)
     df["Data"] = pd.to_datetime(df["Data"])
     df["Settimana"] = df["Data"].dt.to_period("W").apply(lambda r: r.start_time)
     return df
 
 st.sidebar.header("Filtri")
-
 species = st.sidebar.radio("Seleziona la specie:", ["Raspberry", "Blackberry"])
 
-if species == "Raspberry":
-    df = load_data("analisi_lampone_rifiorente.xlsx")
-else:
-    df = load_data("analisi_mora_unifera.xlsx")
+df = load_data(species)
 
 varieta_list = df["Varietà"].unique()
 varieta_sel = st.sidebar.multiselect("Seleziona le varietà", varieta_list)
