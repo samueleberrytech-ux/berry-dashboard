@@ -37,6 +37,9 @@ def load_data(species):
 st.sidebar.header("Filtri")
 species = st.sidebar.radio("Seleziona la specie:", ["Raspberry", "Blackberry"])
 
+if st.sidebar.button("🔄 Reload Data"):
+    st.cache_data.clear()
+    
 df = load_data(species)
 
 varieta_list = df["Varietà"].unique()
