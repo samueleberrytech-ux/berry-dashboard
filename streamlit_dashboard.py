@@ -17,7 +17,7 @@ if not st.session_state.authenticated:
         st.stop()
 
 if st.session_state.authenticated:
-    st.success(("Welcome to your dashboard!")
+    st.success("Welcome to your dashboard!")
     
 DATA_URLS = {
     "Raspberry": "https://drive.google.com/uc?id=1Wmzya0x9D45bUpDU9KjA8sUL1zDJM5d9",
