@@ -9,7 +9,7 @@ if "authenticated" not in st.session_state:
 if not st.session_state.authenticated:
     password = st.text_input("Enter password:", type = "password")
 
-    if password == st.secrets["credentials"]["password"]
+    if password == st.secrets["credentials"]["password"]:
         st.session_state.authenticated = True
         st.rerun()
     else:
