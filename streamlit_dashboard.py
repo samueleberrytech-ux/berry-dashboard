@@ -11,14 +11,13 @@ if not st.session_state.authenticated:
 
     if password == "berry":
         st.session_state.authenticated = True
+        st.rerun()
     else:
         st.error("Access denied ❌")
         st.stop()
 
 if st.session_state.authenticated:
     st.success("Access granted ✅")
-    st.write("Welcome to your dashboard")
-    st.experimental_rerun()
     
 DATA_URLS = {
     "Raspberry": "https://drive.google.com/uc?id=1Wmzya0x9D45bUpDU9KjA8sUL1zDJM5d9",
