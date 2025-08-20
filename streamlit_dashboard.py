@@ -66,8 +66,14 @@ with tab2:
 
 with tab3:
     st.header("Produzione vs Scarto")
-    cumulati_varieta = df_filtered.groupby("Varietà")[["Produzione", "Scarto"]].sum().reset_index() 
+    cumulati_varieta = df_filtered.groupby("Varietà")[["Produzione", "Scarto"]].sum().reset_index()
+    cumulati_varieta["% Scarto"] = (cumulati_varieta["Scarto"] / cumulati_varieta["Produzione"] * 100).round(2)
     fig3 = px.bar(cumulati_varieta, x="Varietà", y=["Produzione", "Scarto"], barmode="group")
+
+    for i, trace in enumerate(fig3.data):
+        if trace.name == "Scarto":
+            trace.text = cumulati_varieta["% Scarto"].apply(lambda x: f"{x}%")
+            trace.textposition = "outside"
     st.plotly_chart(fig3, use_container_width=True, key = "production_vs_waste")
 
 with tab4:  
