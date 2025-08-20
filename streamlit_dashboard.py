@@ -3,14 +3,23 @@ import pandas as pd
 import plotly.express as px
 import gdown
 
-password = st.text_input("Enter password:", type = "password")
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
 
-if password == "berry":
+if not st.session_state.authenticated:
+    password = st.text_input("Enter password:", type = "password")
+
+    if password == "berry":
+        st.session_state.authenticated = True
+        st.experimental_rerun()
+    else:
+        st.error("Access denied ❌")
+        st.stop()
+
+if st.session_state.authenticated:
     st.success("Access granted ✅")
-else:
-    st.error("Access denied ❌")
-    st.stop()
-
+    st.write("Welcome to your dashboard")
+    
 DATA_URLS = {
     "Raspberry": "https://drive.google.com/uc?id=1Wmzya0x9D45bUpDU9KjA8sUL1zDJM5d9",
     "Blackberry": "https://drive.google.com/uc?id=1bv1Dca6kXH28-klpqPvLshBs32efQlBw"
