@@ -35,9 +35,10 @@ def load_data(species):
     return df
 
 st.sidebar.header("Filtri")
+
 species = st.sidebar.radio("Seleziona la specie:", ["Raspberry", "Blackberry"])
 
-if st.sidebar.button("🔄 Reload Data"):
+if st.sidebar.button("🔄 Ricarica dati per " + species):
     st.cache_data.clear()
     
 df = load_data(species)
