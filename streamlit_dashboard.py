@@ -9,7 +9,7 @@ if "authenticated" not in st.session_state:
 if not st.session_state.authenticated:
     password = st.text_input("Enter password:", type = "password")
 
-    if password == "berry":
+    if password == st.secrets["credentials"]["password"]
         st.session_state.authenticated = True
         st.rerun()
     else:
@@ -19,10 +19,7 @@ if not st.session_state.authenticated:
 if st.session_state.authenticated:
     st.success("Welcome to your dashboard!")
     
-DATA_URLS = {
-    "Raspberry": "https://drive.google.com/uc?id=1Wmzya0x9D45bUpDU9KjA8sUL1zDJM5d9",
-    "Blackberry": "https://drive.google.com/uc?id=1bv1Dca6kXH28-klpqPvLshBs32efQlBw"
-}
+DATA_URLS = st.secrets["google_drive"]
 
 @st.cache_data
 def load_data(species):
