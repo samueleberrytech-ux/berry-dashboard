@@ -33,7 +33,7 @@ def load_data(species):
 
 st.sidebar.header("Filtri")
 
-species = st.sidebar.radio("Seleziona la specie:", ["Raspberry", "Blackberry"])
+species = st.sidebar.radio("Seleziona la specie:", ["Raspberry", "Blackberry", "Strawberry"])
 
 if st.sidebar.button("🔄 Ricarica dati per " + species):
     st.cache_data.clear()
@@ -78,7 +78,7 @@ with tab3:
 
 with tab4:  
     st.header("Pezzatura Media")
-    pezzatura = df_filtered.groupby(["Settimana", "Varietà"])["Pezzatura"].mean().reset_index()
-    fig4 = px.line(pezzatura, x="Settimana", y="Pezzatura", color="Varietà", markers=True)
+    media_pezzatura = df.groupby("Varietà")["Pezzatura"].mean().reset_index()
+    fig4 = px.bar(pezzatura, x="Settimana", y="Pezzatura", barmode="group")
     st.plotly_chart(fig4, use_container_width=True, key="Pezzatura") 
 
