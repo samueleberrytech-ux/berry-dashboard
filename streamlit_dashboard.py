@@ -79,6 +79,6 @@ with tab3:
 with tab4:  
     st.header("Pezzatura Media")
     media_pezzatura = df.groupby("Varietà")["Pezzatura"].mean().reset_index()
-    fig4 = px.bar(pezzatura, x="Settimana", y="Pezzatura", barmode="group")
+    fig4 = px.bar(media_pezzatura, x="Settimana", y="Pezzatura", barmode="group")
     st.plotly_chart(fig4, use_container_width=True, key="Pezzatura") 
 
